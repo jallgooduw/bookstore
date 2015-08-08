@@ -2,20 +2,13 @@ from django.forms import widgets
 from rest_framework import serializers
 from bookstore.models import Books
 
-
 class BooksSerializer(serializers.ModelSerializer):
-	title = serializers.CharField(max_length=200)
-        author = serializers.CharField(max_length=200)
-        pubdate = serializers.DateTimeField()
-        publisher = serializers.CharField(max_length=200)
-	summary = serializers.TextField()
-        price = serializers.FloatField()
-        buylink = serializers.URLField()
-        coverimg = serializers.URLField()
+        class Meta:
+                model = Books
+                fields = ('id', 'title', 'author', 'pubdate', 'publisher', 'summary', 'price', 'buylink', 'coverimg')
 
 def create(self, validated_data):
 	return Books.objects.create(**validated_data)
-
 
 def update(self, instance, validated_data):
 	instance.title = validate_data.get('title', instance.title)
@@ -28,8 +21,3 @@ def update(self, instance, validated_data):
 	instance.coverimg = validate_data.get('coverimg', instance.coverimg)
 	instance.save()
 	return instance
-
-class BooksSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = Books
-		fields = ('title', 'author', 'pubdate', 'publisher', 'summary', 'buylink', 'coverimg')
