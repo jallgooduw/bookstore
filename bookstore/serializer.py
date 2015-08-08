@@ -8,7 +8,7 @@ class BooksSerializer(serializers.ModelSerializer):
         author = serializers.CharField(max_length=200)
         pubdate = serializers.DateTimeField()
         publisher = serializers.CharField(max_length=200)
-        summary = serializers.TextField()
+	summary = serializers.TextField()
         price = serializers.FloatField()
         buylink = serializers.URLField()
         coverimg = serializers.URLField()
