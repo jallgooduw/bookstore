@@ -32,11 +32,11 @@ def book_detail(request, pk, format=None):
 		return Response(status=status.HTTP_404_NOT_FOUND)
 
 	if request.method == 'GET':
-		serializer = BooksSerializer(books)
+		serializer = BooksSerializer(book)
 		return Response(serializer.data)
 
 	elif request.method == 'PUT':
-		serializer = BooksSerializer(book, data=request.data)
+		serializer = BooksSerializer(books, data=request.data)
 		if serializer.is_valid():
 			serializer.save()
 			return Response(serializer.data)
